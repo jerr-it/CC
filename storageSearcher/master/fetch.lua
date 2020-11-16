@@ -1,0 +1,6 @@
+shell.run("wget https://github.com/cherrysrc/CC/blob/main/storageSearcher/master/nodes.lua customAPI/nodes.lua")
+shell.run("wget https://github.com/cherrysrc/CC/blob/main/storageSearcher/master/screen customAPI/screen.lua")
+shell.run("wget https://github.com/cherrysrc/CC/blob/main/storageSearcher/master/find.lua find.lua")
+shell.run("wget https://github.com/cherrysrc/CC/blob/main/storageSearcher/master/register.lua register.lua")
+shell.run("wget https://github.com/cherrysrc/CC/blob/main/storageSearcher/master/storage.lua storage.lua")
+shell.run("wget https://github.com/cherrysrc/CC/blob/main/storageSearcher/master/unregister.lua unregister.lua")
