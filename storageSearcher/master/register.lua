@@ -2,10 +2,10 @@ os.loadAPI("customAPI/nodes.lua")
 
 local args = {...}
 
-id = args[1]
-name = args[2]
+local id = args[1]
+local name = args[2]
 
-storage = nodes.load(".nodes")
+local storage = nodes.load(".nodes")
 
 storage[id] = name
 

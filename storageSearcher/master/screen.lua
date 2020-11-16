@@ -4,7 +4,7 @@ end
 
 function mprintln(screen, text)
     screen.write(text)
-    _,y = screen.getCursorPos()
+    local _,y = screen.getCursorPos()
     screen.setCursorPos(1, y+1)
 end
 
