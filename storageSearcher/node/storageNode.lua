@@ -17,9 +17,10 @@ end
 
 function find(targetName)
     local count = 0
-    count = count + searchChest(targetName, "right")
 
+    count = count + searchChest(targetName, "right")
     count = count + searchChest(targetName, "left")
+
     return count
 end
 
@@ -36,7 +37,7 @@ function run()
         if operation == "find" then
             local targetName = args[1]
             local count = find(targetName)
-            
+
             rednet.send(senderID, {
                 ["response"]={count}
             })
