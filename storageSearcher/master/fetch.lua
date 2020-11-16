@@ -1,5 +1,5 @@
 shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/master/nodes.lua customAPI/nodes.lua")
-shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/master/screen customAPI/screen.lua")
+shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/master/screen.lua customAPI/screen.lua")
 shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/master/find.lua find.lua")
 shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/master/register.lua register.lua")
 shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/master/storage.lua storage.lua")
