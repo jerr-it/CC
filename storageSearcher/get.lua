@@ -1,4 +1,4 @@
-os.loadAPI("customAPI/config.lua")
+os.loadAPI("config/config.lua")
 local args = {...}
 
 if #args < 2 then
@@ -8,7 +8,7 @@ end
 
 --Load the turtles own network name
 --needs to be set using setself
-config.load(".config")
+config.load("storageConfig")
 local com = config.get("self")
 
 --Moves items from chest to turtle
@@ -16,7 +16,7 @@ local com = config.get("self")
 --up to 64
 --pushItems:
 --(target, source slot, amount, target slot)
-function getFrom(chest, itemName, itemCount) 
+function getFrom(chest, itemName, itemCount)
     local items = chest.list()
     for idx,data in pairs(items) do
         local name = data["name"]
@@ -61,13 +61,13 @@ for _,device in pairs(devices) do
         local chest = peripheral.wrap(device)
         local n = getFrom(chest, itemName, itemCount - totalFound)
         totalFound = totalFound + n
-        
+
         while n~=0 do
             turtle.transferTo(targetSlot)
-            if turtle.getItemCount(targetSlot) >= stackSize then
+            if turtle.getItemSpace(targetSlot) <= 0 then
                 targetSlot = getFreeSlot()
             end
-            
+
             if totalFound >= itemCount then
                 print("Found all items!")
                 return
@@ -76,7 +76,7 @@ for _,device in pairs(devices) do
             n = getFrom(chest, itemName, itemCount - totalFound)
             totalFound = totalFound + n
         end
-        
+
         if totalFound >= itemCount then
             print("Found all items!")
             return
