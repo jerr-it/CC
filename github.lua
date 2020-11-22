@@ -1,6 +1,11 @@
 --Script for getting resources from github
 local args = {...}
 
+if #args ~= 3 then
+    print("Usage: github <user> <repo> <folder>")
+    return
+end
+
 local gh_username = args[1]
 local gh_repo = args[2]
 local gh_folder = args[3]
