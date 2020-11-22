@@ -4,7 +4,7 @@ local iConfig = nil
 local iFilename = nil
 
 function load(configName)
-    local filename = "." .. configName
+    local filename = "/." .. configName
     if not fs.exists(filename) then
         error("Config doesn't exist!")
     end
