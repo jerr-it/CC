@@ -14,4 +14,4 @@ shell.run("delete insert.lua")
 shell.run("wget https://raw.githubusercontent.com/cherrysrc/CC/main/storageSearcher/insert.lua insert.lua")
 
 --Initial actions, initializing a config file, running initialisation on Dependencies...
-shell.run("./config/create storageConfig")
+shell.run("/config/create storageConfig")
