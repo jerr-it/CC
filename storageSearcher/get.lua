@@ -1,4 +1,4 @@
-os.loadAPI("customAPI/config.lua")
+os.loadAPI("apis/config.lua")
 local args = {...}
 
 if #args < 2 then

@@ -1,4 +1,4 @@
-os.loadAPI("customAPI/config.lua")
+os.loadAPI("apis/config.lua")
 config.load(".config")
 self = config.get("self")
 
@@ -9,7 +9,7 @@ function insert(slot)
     for _,device in pairs(devices) do
         if string.find(device, "chest") then
             local chest = peripheral.wrap(device)
-        
+
             chest.pullItems(self, slot, 64)
             if turtle.getItemCount(slot) == 0 then
                 return
