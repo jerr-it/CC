@@ -1,5 +1,5 @@
 os.loadAPI("config/config.lua")
-config.load(".config")
+config.load("storageConfig")
 self = config.get("self")
 
 local slotCount = 16
