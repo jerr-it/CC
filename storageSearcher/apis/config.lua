@@ -4,18 +4,19 @@ local iConfig = nil
 local iFilename = nil
 
 function load(filename)
-    local fp = fs.open(filename, "r")
-    if fp == nil then
+    if not fs.exists(filename) then
         iConfig = {}
         iFilename = filename
         return
     end
-    
+
+    local fp = fs.open(filename, "r")
+
     local fpContent = fp.readAll()
-    
+
     iConfig = textutils.unserialise(fpContent)
     iFilename = filename
-    fp.close()   
+    fp.close()
 end
 
 function set(key, value)
@@ -32,5 +33,5 @@ function save()
 
     fp.write(content)
     fp.flush()
-    fp.close()    
+    fp.close()
 end
