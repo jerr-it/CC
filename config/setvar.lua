@@ -1,5 +1,5 @@
 --Script for setting a config var in the shell
-os.loadAPI("config.lua")
+os.loadAPI("config/config.lua")
 local args = {...}
 
 varconfig = args[1]

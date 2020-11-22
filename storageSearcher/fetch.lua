@@ -1,5 +1,10 @@
 --Dependencies
+shell.run("cd ..")
+
 shell.run("/github cherrysrc CC config")
+--...
+
+shell.run("cd storageSearcher")
 
 --Modules own files
 shell.run("delete get.lua")
