@@ -1,4 +1,4 @@
-os.loadAPI("apis/config.lua")
+os.loadAPI("config/config.lua")
 local args = {...}
 
 if #args < 2 then
@@ -8,7 +8,7 @@ end
 
 --Load the turtles own network name
 --needs to be set using setself
-config.load(".config")
+config.load("storageConfig")
 local com = config.get("self")
 
 --Moves items from chest to turtle

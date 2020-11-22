@@ -1,4 +1,4 @@
-os.loadAPI("apis/config.lua")
+os.loadAPI("config/config.lua")
 config.load(".config")
 self = config.get("self")
 
