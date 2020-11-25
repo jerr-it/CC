@@ -1,7 +1,7 @@
 os.loadAPI("config/config.lua")
 local args = {...}
 
-if #args < 2 then
+if #args ~= 2 then
     error("Usage: get <amount> <item>")
     return
 end
@@ -11,39 +11,6 @@ end
 config.load("storageConfig")
 local com = config.get("self")
 
---Moves items from chest to turtle
---returns the amount of items moved
---up to 64
---pushItems:
---(target, source slot, amount, target slot)
-function getFrom(chest, itemName, itemCount)
-    local items = chest.list()
-    for idx,data in pairs(items) do
-        local name = data["name"]
-        if string.find(name, itemName) then
-            local n = chest.pushItems(com, idx, itemCount, 1)
-            return n
-        end
-    end
-    return 0
-end
-
---Select the turtles first free slot
---Only defined for readability
-local slotCount = 16
-local stackSize = 64
-function getFreeSlot()
-    for i = 2,slotCount,1 do
-        currentCount = turtle.getItemCount(i)
-        if currentCount == 0 then
-            return i
-        end
-    end
-    --No free slot
-    error("No free slots found!")
-    return -1
-end
-
 --All blocks connected to the network
 local devices = peripheral.getNames()
 
@@ -52,7 +19,44 @@ local itemName = args[2]
 local itemCount = tonumber(args[1])
 
 local totalFound = 0
-local targetSlot = getFreeSlot()
+
+--Only defined for readability
+local slotCount = 16
+
+--Moves items from chest to turtle
+--returns the amount of items moved
+--up to 64
+--pushItems:
+--(target, source slot, amount, target slot)
+function getFrom(chest, itemName, itemCount)
+    itemName = string.lower(itemName)
+
+    local n = 0
+
+    local items = chest.list()
+    for idx,_ in pairs(items) do
+        local item = chest.getItemDetail(idx)
+        local iName = string.lower(item.displayName)
+        local iCount = item.count
+
+        if string.find(iName, itemName) then
+            for tSlot = 1,slotCount,1 do
+                n = n + chest.pushItems(com, idx, itemCount, tSlot)
+                iCount = iCount - n
+
+                if n >= itemCount then
+                    return n
+                end
+
+                if iCount <= 0 then
+                    break
+                end
+            end
+        end
+    end
+
+    return n
+end
 
 --check all network devices
 for _,device in pairs(devices) do
@@ -63,11 +67,6 @@ for _,device in pairs(devices) do
         totalFound = totalFound + n
 
         while n~=0 do
-            turtle.transferTo(targetSlot)
-            if turtle.getItemSpace(targetSlot) <= 0 then
-                targetSlot = getFreeSlot()
-            end
-
             if totalFound >= itemCount then
                 print("Found all items!")
                 return
