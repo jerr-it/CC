@@ -10,6 +10,10 @@ end
 --needs to be set using setself
 config.load("storageConfig")
 local com = config.get("self")
+if com == nil then
+    error("Self not set! Run 'init <name>' to set identity!")
+end
+
 local chests = config.get("p_chests")
 local chestCount = #chests
 
@@ -63,7 +67,7 @@ function getFrom(chest, itemName, itemCount)
 end
 
 for i = 1,chestCount,1 do
-    local chest = peripheral.wrap(device)
+    local chest = peripheral.wrap(chests[i])
     local n = getFrom(chest, itemName, itemCount - totalFound)
     totalFound = totalFound + n
 
