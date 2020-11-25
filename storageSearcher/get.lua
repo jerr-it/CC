@@ -10,6 +10,8 @@ end
 --needs to be set using setself
 config.load("storageConfig")
 local com = config.get("self")
+local chests = config.get("p_chests")
+local chestCount = #chests
 
 --All blocks connected to the network
 local devices = peripheral.getNames()
@@ -39,17 +41,19 @@ function getFrom(chest, itemName, itemCount)
         local iName = string.lower(item.displayName)
         local iCount = item.count
 
-        if string.find(iName, itemName) then
+        if string.find(iName, itemName, 1, true) then
             for tSlot = 1,slotCount,1 do
-                n = n + chest.pushItems(com, idx, itemCount, tSlot)
-                iCount = iCount - n
+                if turtle.getItemSpace(tSlot) >= 1 then
+                    n = n + chest.pushItems(com, idx, itemCount, tSlot)
+                    iCount = iCount - n
 
-                if n >= itemCount then
-                    return n
-                end
+                    if n >= itemCount then
+                        return n
+                    end
 
-                if iCount <= 0 then
-                    break
+                    if iCount <= 0 then
+                        break
+                    end
                 end
             end
         end
@@ -58,28 +62,24 @@ function getFrom(chest, itemName, itemCount)
     return n
 end
 
---check all network devices
-for _,device in pairs(devices) do
-    --ignore non-chests
-    if string.find(device, "chest") then
-        local chest = peripheral.wrap(device)
-        local n = getFrom(chest, itemName, itemCount - totalFound)
-        totalFound = totalFound + n
+for i = 1,chestCount,1 do
+    local chest = peripheral.wrap(device)
+    local n = getFrom(chest, itemName, itemCount - totalFound)
+    totalFound = totalFound + n
 
-        while n~=0 do
-            if totalFound >= itemCount then
-                print("Found all items!")
-                return
-            end
-            --will be placed in first slot
-            n = getFrom(chest, itemName, itemCount - totalFound)
-            totalFound = totalFound + n
-        end
-
+    while n~=0 do
         if totalFound >= itemCount then
             print("Found all items!")
             return
         end
+        --will be placed in first slot
+        n = getFrom(chest, itemName, itemCount - totalFound)
+        totalFound = totalFound + n
+    end
+
+    if totalFound >= itemCount then
+        print("Found all items!")
+        return
     end
 end
 
