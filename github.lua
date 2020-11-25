@@ -19,5 +19,6 @@ shell.run("cd " .. gh_folder)
 shell.run("delete fetch.lua")
 shell.run("wget " .. gh_url .. " fetch.lua")
 shell.run("fetch")
+shell.run("delete fetch.lua")
 
 shell.run("cd ..")
