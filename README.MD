@@ -33,5 +33,4 @@ If you want to contribute modules, or host some in your own repos, you'll need t
 
 0. Look at existing modules, if in doubt
 1. Every module contains a fetch.lua, it's used to download all the modules required files from the web.
-2. Fetching a modules dependencies can be done via a lot of 'wget' shell commands, but it's a lot less work and more readable to run the github script in a shell command for each dependency.
 3. One module per folder, otherwise it'll get messy
