@@ -25,9 +25,11 @@ shell.run("wget " .. gh_url .. " fetch.lua")
 os.loadAPI(gh_folder .. "/fetch.lua")
 
 --Install dependencies
+shell.run("cd ..")
 for i = 1,#fetch.dependencies,1 do
     shell.run("/github " .. fetch.dependencies[i])
 end
+shell.run("cd " .. gh_folder)
 
 --Install module files
 local fileURL = "https://raw.githubusercontent.com/" .. gh_username .. "/" .. gh_repo .. "/" .. gh_folder .. "/"
