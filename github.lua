@@ -31,6 +31,9 @@ for i = 1,#fetch.dependencies,1 do
 end
 shell.run("cd " .. gh_folder)
 
+--Guarantee, that were using the correct fetch here
+--Without this, the fetch object would still contain dependencies, files from the last dependency in the previous loop
+os.loadAPI(gh_folder .. "/fetch.lua")
 --Install module files
 local fileURL = "https://raw.githubusercontent.com/" .. gh_username .. "/" .. gh_repo .. "/main/" .. gh_folder .. "/"
 for i = 1,#fetch.files,1 do
