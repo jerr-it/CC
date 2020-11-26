@@ -32,7 +32,7 @@ end
 shell.run("cd " .. gh_folder)
 
 --Install module files
-local fileURL = "https://raw.githubusercontent.com/" .. gh_username .. "/" .. gh_repo .. "/" .. gh_folder .. "/"
+local fileURL = "https://raw.githubusercontent.com/" .. gh_username .. "/" .. gh_repo .. "/main/" .. gh_folder .. "/"
 for i = 1,#fetch.files,1 do
     shell.run("delete " .. fetch.files[i])
     shell.run("wget " .. fileURL .. fetch.files[i] .. " " .. fetch.files[i])
