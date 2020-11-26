@@ -8,7 +8,6 @@ files = {
 }
 
 function init()
-    shell.run("/config/create treeChopper")
     print("---------------------")
     print("*** 1. Switch into the treeChopper directory using 'cd treeChopper'")
     print("*** 2. Run 'init <side distance> <forward distance> <rows>' to setup your treeCopper")

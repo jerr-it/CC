@@ -9,7 +9,6 @@ files = {
 }
 
 function init()
-    shell.run("/config/create storageConfig")
     print("---------------------")
     print("*** 1. Switch into the storageSearcher directory using 'cd storageSearcher'")
     print("*** 2. Run 'init <name>' to setup your storageSearcher")

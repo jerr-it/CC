@@ -8,6 +8,8 @@ if #args ~= 1 then
     error("Usage: init <name>")
 end
 
+shell.run("/config/create storageConfig")
+
 local turtleName = args[1]
 
 local periphs = peripheral.getNames()
