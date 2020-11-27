@@ -16,32 +16,31 @@ local periphs = peripheral.getNames()
 
 local alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"}
 
---Track the chests
-local chests = {}
-local chestIdx = 1
 --Track the furnaces
 --Not used atm
 local furnaces = {}
 local furnaceIdx = 1
 
 --Dont care about index number
-for _,name in pairs(periphs) do
+for idx,name in pairs(periphs) do
     if string.find(name, "chest") then
-        chests[chestIdx] = {name, alphabet[chestIdx%26]}
-        chestIdx = chestIdx + 1
+        pos = (idx%#alphabet) + 1
+        if not alphabet[pos] then
+            alphabet[pos] = {}
+        end
+        alphabet[pos].append(name)
     elseif string.find(name, "furnace") then
         furnaces[furnaceIdx] = name
         furnaceIdx = furnaceIdx + 1
     end
 end
-
 --Save the determined lists
 --in the storage config
 
 config.load("storageConfig")
 
 config.set("self", turtleName)
-config.set("p_chests", chests)
+config.set("p_alphabet", alphabet)
 config.set("p_furnaces", furnaces)
 
 config.save()
