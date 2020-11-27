@@ -23,14 +23,16 @@ local furnaceIdx = 1
 
 local letterChestMap = {}
 
---Dont care about index number
-for idx,name in pairs(periphs) do
+local idx = 0
+--Dont care about chest number
+for _,name in pairs(periphs) do
     if string.find(name, "chest") then
         local bucket = alphabet[(idx%#alphabet)+1]
         if not letterChestMap[bucket] then
             letterChestMap[bucket] = {}
         end
         table.insert(letterChestMap[bucket], name)
+        idx = idx + 1
     elseif string.find(name, "furnace") then
         furnaces[furnaceIdx] = name
         furnaceIdx = furnaceIdx + 1
