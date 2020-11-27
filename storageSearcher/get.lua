@@ -43,22 +43,12 @@ function getFrom(chest, itemName, itemCount)
     for idx,_ in pairs(items) do
         local item = chest.getItemDetail(idx)
         local iName = item.name
-        local iCount = item.count
 
         if string.find(iName, itemName, 10, true) then
-            for tSlot = 1,slotCount,1 do
-                if turtle.getItemSpace(tSlot) >= 1 then
-                    n = n + chest.pushItems(com, idx, itemCount, tSlot)
-                    iCount = iCount - n
+            n = n + chest.pushItems(com, idx, itemCount)
 
-                    if n >= itemCount then
-                        return n
-                    end
-
-                    if iCount <= 0 then
-                        break
-                    end
-                end
+            if n >= itemCount then
+                return n
             end
         end
     end
