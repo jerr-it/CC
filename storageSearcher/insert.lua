@@ -6,16 +6,28 @@ local allChests = config.get("p_letterChestMap")
 
 local slotCount = 16
 
+function split(s, delim)
+    parts = {};
+    for match in (s..delim):gmatch("(.-)"..delim) do
+        table.insert(parts, match);
+    end
+    return parts;
+end
+
 for turtleSlotIdx = 1,slotCount,1 do
-    local itemName = turtle.getItemDetail(turtleSlotIdx)
-    local chests = allChests[string.sub(itemName,1,1)]
+    local item = turtle.getItemDetail(turtleSlotIdx)
 
-    for chestIdx = 1,#chests,1 do
-        local chest = peripheral.wrap(chests[chestIdx])
+    if item then
+        local itemName = split(item.name, ":")[2]
+        local chests = allChests[string.sub(itemName,1,1)]
 
-        chest.pullItems(self, turtleSlotIdx, 64)
-        if turtle.getItemCount(turtleSlotIdx) == 0 then
-            break
+        for chestIdx = 1,#chests,1 do
+            local chest = peripheral.wrap(chests[chestIdx])
+
+            chest.pullItems(self, turtleSlotIdx, 64)
+            if turtle.getItemCount(turtleSlotIdx) == 0 then
+                break
+            end
         end
     end
 end
