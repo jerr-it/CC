@@ -21,14 +21,16 @@ local alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p
 local furnaces = {}
 local furnaceIdx = 1
 
+local letterChestMap = {}
+
 --Dont care about index number
 for idx,name in pairs(periphs) do
     if string.find(name, "chest") then
-        pos = (idx%#alphabet) + 1
-        if not alphabet[pos] then
-            alphabet[pos] = {}
+        local bucket = alphabet[(idx%#alphabet)+1]
+        if not letterChestMap[bucket] then
+            letterChestMap[bucket] = {}
         end
-        alphabet[pos].append(name)
+        table.insert(letterChestMap[bucket], name)
     elseif string.find(name, "furnace") then
         furnaces[furnaceIdx] = name
         furnaceIdx = furnaceIdx + 1
@@ -40,7 +42,7 @@ end
 config.load("storageConfig")
 
 config.set("self", turtleName)
-config.set("p_alphabet", alphabet)
+config.set("p_letterChestMap", letterChestMap)
 config.set("p_furnaces", furnaces)
 
 config.save()

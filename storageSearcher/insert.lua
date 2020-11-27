@@ -2,21 +2,20 @@ os.loadAPI("config/config.lua")
 config.load("storageConfig")
 
 local self = config.get("self")
-local chests = config.get("p_chests")
+local allChests = config.get("p_letterChestMap")
 
 local slotCount = 16
 
-function insert(slot)
-    for i = 1,#chests,1 do
-        local chest = peripheral.wrap(chests[i])
+for turtleSlotIdx = 1,slotCount,1 do
+    local itemName = turtle.getItemDetail(turtleSlotIdx)
+    local chests = allChests[string.sub(itemName,1,1)]
 
-        chest.pullItems(self, slot, 64)
-        if turtle.getItemCount(slot) == 0 then
-            return
+    for chestIdx = 1,#chests,1 do
+        local chest = peripheral.wrap(chests[chestIdx])
+
+        chest.pullItems(self, turtleSlotIdx, 64)
+        if turtle.getItemCount(turtleSlotIdx) == 0 then
+            break
         end
     end
-end
-
-for i = 1,slotCount,1 do
-    insert(i)
 end

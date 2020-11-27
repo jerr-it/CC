@@ -26,9 +26,6 @@ if com == nil then
     error("Self not set! Run 'init <name>' to set identity!")
 end
 
-local chests = config.get("p_chests")
-local chestCount = #chests
-
 --All blocks connected to the network
 local devices = peripheral.getNames()
 
@@ -37,6 +34,11 @@ local itemName = args[2]
 local itemCount = tonumber(args[1])
 
 local totalFound = 0
+
+local allChests = config.get("p_letterChestMap")
+
+local chests = allChests[string.sub(itemName,1,1)]
+local chestCount = #chests
 
 --Moves items from chest to turtle
 --returns the amount of items moved
