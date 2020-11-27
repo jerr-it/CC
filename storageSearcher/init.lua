@@ -14,7 +14,7 @@ local turtleName = args[1]
 
 local periphs = peripheral.getNames()
 
-local alphabet = "abcdefghijklmnopqrstuvwxyz"
+local alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"}
 
 --Track the chests
 local chests = {}
