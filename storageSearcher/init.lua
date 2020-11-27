@@ -14,6 +14,8 @@ local turtleName = args[1]
 
 local periphs = peripheral.getNames()
 
+local alphabet = "abcdefghijklmnopqrstuvwxyz"
+
 --Track the chests
 local chests = {}
 local chestIdx = 1
@@ -25,7 +27,7 @@ local furnaceIdx = 1
 --Dont care about index number
 for _,name in pairs(periphs) do
     if string.find(name, "chest") then
-        chests[chestIdx] = name
+        chests[chestIdx] = {name, alphabet[chestIdx%26]}
         chestIdx = chestIdx + 1
     elseif string.find(name, "furnace") then
         furnaces[furnaceIdx] = name
