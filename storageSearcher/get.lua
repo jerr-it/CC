@@ -6,6 +6,18 @@ if #args ~= 2 then
     return
 end
 
+local spaceAvailable = false
+for i = 1,16,1 do
+    if turtle.getItemSpace(i) > 0 then
+        spaceAvailable = true
+        break
+    end
+end
+
+if not spaceAvailable then
+    error("Turtle inventory full!")
+end
+
 --Load the turtles own network name
 --needs to be set using setself
 config.load("storageConfig")
@@ -26,9 +38,6 @@ local itemCount = tonumber(args[1])
 
 local totalFound = 0
 
---Only defined for readability
-local slotCount = 16
-
 --Moves items from chest to turtle
 --returns the amount of items moved
 --up to 64
@@ -42,23 +51,13 @@ function getFrom(chest, itemName, itemCount)
     local items = chest.list()
     for idx,_ in pairs(items) do
         local item = chest.getItemDetail(idx)
-        local iName = string.lower(item.displayName)
-        local iCount = item.count
+        local iName = item.name
 
-        if string.find(iName, itemName, 1, true) then
-            for tSlot = 1,slotCount,1 do
-                if turtle.getItemSpace(tSlot) >= 1 then
-                    n = n + chest.pushItems(com, idx, itemCount, tSlot)
-                    iCount = iCount - n
+        if string.find(iName, itemName, 10, true) then
+            n = n + chest.pushItems(com, idx, itemCount)
 
-                    if n >= itemCount then
-                        return n
-                    end
-
-                    if iCount <= 0 then
-                        break
-                    end
-                end
+            if n >= itemCount then
+                return n
             end
         end
     end
