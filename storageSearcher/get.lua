@@ -6,6 +6,18 @@ if #args ~= 2 then
     return
 end
 
+local spaceAvailable = false
+for i = 1,16,1 do
+    if turtle.getItemSpace(i) > 0 then
+        spaceAvailable = true
+        break
+    end
+end
+
+if not spaceAvailable then
+    error("Turtle inventory full!")
+end
+
 --Load the turtles own network name
 --needs to be set using setself
 config.load("storageConfig")
@@ -25,9 +37,6 @@ local itemName = args[2]
 local itemCount = tonumber(args[1])
 
 local totalFound = 0
-
---Only defined for readability
-local slotCount = 16
 
 --Moves items from chest to turtle
 --returns the amount of items moved
