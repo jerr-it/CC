@@ -5,7 +5,8 @@ dependencies = {
 files = {
     "get.lua",
     "insert.lua",
-    "init.lua"
+    "init.lua",
+    "sort.lua"
 }
 
 function init()
