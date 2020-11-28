@@ -56,7 +56,7 @@ function getFrom(chest, itemName, itemCount)
         local iName = item.name
 
         if string.find(iName, itemName, 10, true) then
-            n = n + chest.pushItems(com, idx, itemCount)
+            n = n + chest.pushItems(com, idx, itemCount - n)
 
             if n >= itemCount then
                 return n
