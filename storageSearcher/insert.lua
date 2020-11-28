@@ -24,7 +24,7 @@ function annexChest(understaffedBucket)
             if #chest.list() == 0 then
                 table.remove(chests, idx)
                 table.insert(allChests[understaffedBucket], chestName)
-                
+
                 config.set("p_letterChestMap", allChests)
                 config.save()
                 return
@@ -53,7 +53,7 @@ for turtleSlotIdx = 1,slotCount,1 do
         --Bucket is full
         --Move empty chests from other buckets to this bucket
         if turtle.getItemCount(turtleSlotIdx) >= 1 then
-            annexChest(allChests[string.sub(itemName,1,1)])
+            annexChest(string.sub(itemName,1,1))
             shell.run("insert")
             return
         end
