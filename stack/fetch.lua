@@ -1,5 +1,5 @@
 dependencies = {}
 
-files = {"monitor.lua"}
+files = {"stack.lua"}
 
 function init() end

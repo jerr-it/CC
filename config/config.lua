@@ -1,13 +1,10 @@
---Module for loading and saving configuration
-
+-- Module for loading and saving configuration
 local iConfig = nil
 local iFilename = nil
 
 function load(configName)
     local filename = "/." .. configName
-    if not fs.exists(filename) then
-        error("Config doesn't exist!")
-    end
+    if not fs.exists(filename) then error("Config doesn't exist!") end
 
     local fp = fs.open(filename, "r")
 

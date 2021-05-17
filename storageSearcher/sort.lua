@@ -17,17 +17,13 @@ local buckets = config.get("p_letterChestMap")
 function sortChest(chestName)
     local chest = peripheral.wrap(chestName)
     local items = chest.list()
-    for idx,data in pairs(items) do
+    for idx, data in pairs(items) do
         local n = chest.pushItems(self, idx, 64)
-        if n == 0 then
-            error("Turtle inventory full, cant proceed!")
-        end
+        if n == 0 then error("Turtle inventory full, cant proceed!") end
         shell.run("insert")
-    end    
+    end
 end
 
-for _,v in pairs(buckets) do
-    for _,chestName in pairs(v) do
-        sortChest(chestName)
-    end    
+for _, v in pairs(buckets) do
+    for _, chestName in pairs(v) do sortChest(chestName) end
 end

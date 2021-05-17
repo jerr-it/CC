@@ -1,9 +1,7 @@
---Script for creating a new config file
+-- Script for creating a new config file
 local args = {...}
 
-if #args ~= 1 then
-    error("Usage: create <config name>")
-end
+if #args ~= 1 then error("Usage: create <config name>") end
 
 local fp = fs.open("/." .. args[1], "w")
 fp.write("{}")

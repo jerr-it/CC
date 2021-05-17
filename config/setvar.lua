@@ -1,4 +1,4 @@
---Script for setting a config var in the shell
+-- Script for setting a config var in the shell
 os.loadAPI("config/config.lua")
 local args = {...}
 
