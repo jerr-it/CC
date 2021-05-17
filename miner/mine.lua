@@ -66,7 +66,7 @@ end
 -- Digs one step of the tunnel
 function dig_step()
     local scan = scan_position()
-    local move_stack = Stack.new()
+    local move_stack = stack.new()
 
     while true do
         if scan.contains_ore then
@@ -80,7 +80,7 @@ function dig_step()
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                Stack.push(move_stack,
+                stack.push(move_stack,
                            {["action"] = turtle.back, ["scan"] = scan})
                 continue = true
             end
@@ -93,7 +93,7 @@ function dig_step()
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                Stack.push(move_stack,
+                stack.push(move_stack,
                            {["action"] = turtle.down, ["scan"] = scan})
                 continue = true
             end
@@ -106,7 +106,7 @@ function dig_step()
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                Stack.push(move_stack, {["action"] = turtle.up, ["scan"] = scan})
+                stack.push(move_stack, {["action"] = turtle.up, ["scan"] = scan})
                 continue = true
             end
 
@@ -119,7 +119,7 @@ function dig_step()
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                Stack.push(move_stack,
+                stack.push(move_stack,
                            {["action"] = move_back_turn_left, ["scan"] = scan})
                 continue = true
             end
@@ -133,7 +133,7 @@ function dig_step()
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                Stack.push(move_stack,
+                stack.push(move_stack,
                            {["action"] = move_back_turn_right, ["scan"] = scan})
                 continue = true
             end
@@ -148,14 +148,14 @@ function dig_step()
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                Stack.push(move_stack,
+                stack.push(move_stack,
                            {["action"] = move_back_turn_twice, ["scan"] = scan})
                 continue = true
             end
 
             scan = scan_position()
         else
-            local previous = Stack.pop(move_stack)
+            local previous = stack.pop(move_stack)
             if previous == nil then break end
 
             previous.action()
