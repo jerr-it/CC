@@ -1,4 +1,4 @@
-os.loadAPI("Stack.lua")
+os.loadAPI("/stack/stack.lua")
 print("tunnel count? ")
 local tunnelCount = tonumber(read())
 print("tunnel length? ")
