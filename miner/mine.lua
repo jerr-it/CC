@@ -180,8 +180,8 @@ end
 function is_full() return turtle.getItemCount(16) > 0 end
 
 -- Places a chest and dumps all items into it
-function dump_items()
-    for i = 1, tunnelCount * 3, 1 do turtle.back() end
+function dump_items(progress)
+    for i = 1, progress * 3, 1 do turtle.back() end
 
     for i = 1, 16, 1 do
         turtle.select(i)
@@ -190,7 +190,7 @@ function dump_items()
 
     turtle.select(1)
 
-    for i = 1, tunnelCount * 3, 1 do turtle.forward() end
+    for i = 1, progress * 3, 1 do turtle.forward() end
 
 end
 
@@ -206,7 +206,7 @@ for i = 1, tunnelCount, 1 do
     dig_tunnel()
     turtle.turnRight()
 
-    if is_full() then dump_items() end
+    if is_full() then dump_items(i) end
 end
 
 for i = 1, tunnelCount * 3, 1 do turtle.back() end
