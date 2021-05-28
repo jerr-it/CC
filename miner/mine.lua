@@ -4,17 +4,29 @@ local tunnelCount = tonumber(read())
 print("tunnel length? ")
 local tunnelLength = tonumber(read())
 
+local liquids = {"water", "lava"}
+function is_liquid(block_data)
+    for i = 1, #liquids, 1 do
+        if string.find(block_data.name, liquids[i]) then return true end
+    end
+    return false
+end
+
 -- Performs a persistent dig in the given direction
 -- Returns whether or not an ore was found
 function dig(dig_fn, inspect_fn)
     local prev_has_block, prev_data = false, nil
     local has_block, data = inspect_fn()
 
+    if has_block then if is_liquid(data) then has_block = false end end
+
     while has_block do
         dig_fn()
 
         prev_has_block, prev_data = has_block, data
         has_block, data = inspect_fn()
+
+        if has_block then if is_liquid(data) then has_block = false end end
     end
 
     if prev_has_block then return is_ore(prev_data) end
