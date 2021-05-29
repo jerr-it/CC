@@ -3,7 +3,7 @@ dependencies = {"cherrysrc CC config"}
 files = {"get.lua", "insert.lua", "init.lua", "sort.lua"}
 
 function init()
-    print("---------------------")
+    print("Version 1.0")
     print(
         "*** 1. Switch into the storageSearcher directory using 'cd storageSearcher'")
     print("*** 2. Run 'init <name>' to setup your storageSearcher")

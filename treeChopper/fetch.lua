@@ -3,7 +3,7 @@ dependencies = {"cherrysrc CC config"}
 files = {"chop.lua", "init.lua"}
 
 function init()
-    print("---------------------")
+    print("Version 1.0")
     print("*** 1. Switch into the treeChopper directory using 'cd treeChopper'")
     print(
         "*** 2. Run 'init <side distance> <forward distance> <rows>' to setup your treeCopper")

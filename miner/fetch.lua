@@ -1,5 +1,5 @@
-dependencies = {"cherrysrc CC stack"}
+dependencies = {"cherrysrc CC stack", "cherrysrc CC signal"}
 
 files = {"mine.lua"}
 
-function init() print("Don't forget to add fuel") end
+function init() print("Version 1.0") end

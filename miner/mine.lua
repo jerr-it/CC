@@ -1,8 +1,12 @@
 os.loadAPI("/stack/stack.lua")
+os.loadAPI("/signal/sender.lua")
+
 print("tunnel count? ")
 local tunnelCount = tonumber(read())
 print("tunnel length? ")
 local tunnelLength = tonumber(read())
+
+sender.init("turtle_status_channel", "left")
 
 local liquids = {"water", "lava"}
 function is_liquid(block_data)
@@ -10,6 +14,34 @@ function is_liquid(block_data)
         if string.find(block_data.name, liquids[i]) then return true end
     end
     return false
+end
+
+function forward()
+    turtle.forward()
+
+    local fuel_level = turtle.getFuelLevel()
+    if fuel_level == 0 then sender.send("Out of fuel!") end
+end
+
+function back()
+    turtle.back()
+
+    local fuel_level = turtle.getFuelLevel()
+    if fuel_level == 0 then sender.send("Out of fuel!") end
+end
+
+function up()
+    turtle.up()
+
+    local fuel_level = turtle.getFuelLevel()
+    if fuel_level == 0 then sender.send("Out of fuel!") end
+end
+
+function down()
+    turtle.down()
+
+    local fuel_level = turtle.getFuelLevel()
+    if fuel_level == 0 then sender.send("Out of fuel!") end
 end
 
 -- Performs a persistent dig in the given direction
@@ -60,17 +92,17 @@ function scan_position()
 end
 
 function move_back_turn_left()
-    turtle.back()
+    back()
     turtle.turnLeft()
 end
 
 function move_back_turn_right()
-    turtle.back()
+    back()
     turtle.turnRight()
 end
 
 function move_back_turn_twice()
-    turtle.back()
+    back()
     turtle.turnRight()
     turtle.turnRight()
 end
@@ -86,46 +118,44 @@ function dig_step()
 
             if scan.front then
                 dig(turtle.dig, turtle.inspect)
-                turtle.forward()
+                forward()
 
                 scan.front = false
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                stack.push(move_stack,
-                           {["action"] = turtle.back, ["scan"] = scan})
+                stack.push(move_stack, {["action"] = back, ["scan"] = scan})
                 continue = true
             end
 
             if not continue and scan.top then
                 dig(turtle.digUp, turtle.inspectUp)
-                turtle.up()
+                up()
 
                 scan.top = false
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                stack.push(move_stack,
-                           {["action"] = turtle.down, ["scan"] = scan})
+                stack.push(move_stack, {["action"] = down, ["scan"] = scan})
                 continue = true
             end
 
             if not continue and scan.down then
                 turtle.digDown()
-                turtle.down()
+                down()
 
                 scan.down = false
                 scan.contains_ore = scan.front or scan.back or scan.left or
                                         scan.right or scan.top or scan.down
 
-                stack.push(move_stack, {["action"] = turtle.up, ["scan"] = scan})
+                stack.push(move_stack, {["action"] = up, ["scan"] = scan})
                 continue = true
             end
 
             if not continue and scan.right then
                 turtle.turnRight()
                 dig(turtle.dig, turtle.inspect)
-                turtle.forward()
+                forward()
 
                 scan.right = false
                 scan.contains_ore = scan.front or scan.back or scan.left or
@@ -139,7 +169,7 @@ function dig_step()
             if not continue and scan.left then
                 turtle.turnLeft()
                 dig(turtle.dig, turtle.inspect)
-                turtle.forward()
+                forward()
 
                 scan.left = false
                 scan.contains_ore = scan.front or scan.back or scan.left or
@@ -154,7 +184,7 @@ function dig_step()
                 turtle.turnLeft()
                 turtle.turnLeft()
                 dig(turtle.dig, turtle.inspect)
-                turtle.forward()
+                forward()
 
                 scan.back = false
                 scan.contains_ore = scan.front or scan.back or scan.left or
@@ -177,7 +207,7 @@ function dig_step()
     end
 
     dig(turtle.dig, turtle.inspect)
-    turtle.forward()
+    forward()
     dig(turtle.digDown, turtle.inspectDown)
 end
 
@@ -185,7 +215,7 @@ end
 function dig_tunnel()
     for i = 1, tunnelLength, 1 do dig_step() end
 
-    for i = 1, tunnelLength, 1 do turtle.back() end
+    for i = 1, tunnelLength, 1 do back() end
 end
 
 -- Returns true if the last slot of the turtle contains atleast one item
@@ -193,7 +223,7 @@ function is_full() return turtle.getItemCount(16) > 0 end
 
 -- Places a chest and dumps all items into it
 function dump_items(progress)
-    for i = 1, progress * 3, 1 do turtle.back() end
+    for i = 1, progress * 3, 1 do back() end
 
     for i = 1, 16, 1 do
         turtle.select(i)
@@ -202,8 +232,7 @@ function dump_items(progress)
 
     turtle.select(1)
 
-    for i = 1, progress * 3, 1 do turtle.forward() end
-
+    for i = 1, progress * 3, 1 do forward() end
 end
 
 for i = 1, tunnelCount, 1 do
@@ -221,4 +250,6 @@ for i = 1, tunnelCount, 1 do
     if is_full() then dump_items(i) end
 end
 
-for i = 1, tunnelCount * 3, 1 do turtle.back() end
+for i = 1, tunnelCount * 3, 1 do back() end
+
+sender.stop()

@@ -2,4 +2,4 @@ dependencies = {}
 
 files = {"stack.lua"}
 
-function init() end
+function init() print("Version 1.0") end
