@@ -34,7 +34,7 @@ shell.run("cd " .. gh_folder)
 shell.run("wget " .. gh_url .. "fetch.lua" .. " fetch.lua")
 
 -- Load module info as api
-os.loadAPI(gh_folder .. "/fetch.lua")
+local fetch = require("." .. gh_folder).fetch
 
 -- Install dependencies
 shell.run("cd ..")
@@ -45,7 +45,7 @@ shell.run("cd " .. gh_folder)
 
 -- Guarantee, that were using the correct fetch here
 -- Without this, the fetch object would still contain dependencies, files from the last dependency in the previous loop
-os.loadAPI(gh_folder .. "/fetch.lua")
+fetch = require("." .. gh_folder).fetch
 -- Install module files
 for i = 1, #fetch.files, 1 do
     shell.run("delete " .. fetch.files[i])

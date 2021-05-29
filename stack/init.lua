@@ -1,1 +1,1 @@
-return require("stack")
+return {fetch = require("fetch"), module = require("stack")}

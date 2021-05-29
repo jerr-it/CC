@@ -1,5 +1,5 @@
-local stack = require(".stack")
-local signal = require(".signal")
+local stack = require(".stack").module
+local signal = require(".signal").module
 
 print("tunnel count? ")
 local tunnelCount = tonumber(read())

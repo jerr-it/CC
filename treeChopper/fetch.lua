@@ -10,3 +10,5 @@ function init()
     print(
         "*** Note: Only works on default stump trees. Fat jungle trees or mutated oaks wont work.")
 end
+
+return {dependencies = dependencies, files = files, init = init}
