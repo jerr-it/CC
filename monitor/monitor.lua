@@ -86,3 +86,27 @@ end
 
 -- Convenience function for getting old cursor
 function getOldCursor() return oldCursor.x, oldCursor.y end
+
+return {
+    iMonitor = iMonitor,
+    nativeTerm = nativeTerm,
+    oldCursor = oldCursor,
+    set = set,
+    clear = clear,
+    print = print,
+    println = println,
+    size = size,
+    setCursor = setCursor,
+    getCursor = getCursor,
+    resetColours = resetColours,
+    setTextColour = setTextColour,
+    setBackgroundColor = setBackgroundColor,
+    enableDrawing = enableDrawing,
+    disableDrawing = disableDrawing,
+    drawPixel = drawPixel,
+    drawLine = drawLine,
+    drawBox = drawBox,
+    drawFilledBox = drawFilledBox,
+    setOldCursor = setOldCursor,
+    getOldCursor = getOldCursor
+}

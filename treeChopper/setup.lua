@@ -1,7 +1,9 @@
-os.loadAPI("config/config.lua")
+local config = require(".config")
 local args = {...}
 
-if #args ~= 3 then error("Usage: init <side distance> <forward distance> <rows>") end
+if #args ~= 3 then
+    error("Usage: setup <side distance> <forward distance> <rows>")
+end
 
 shell.run("/config/create treeChopper")
 

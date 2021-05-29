@@ -7,7 +7,7 @@ if answer ~= "y" then
 end
 term.setTextColor(colours.white)
 
-os.loadAPI("config/config.lua")
+local config = require(".config")
 
 config.load("storageConfig")
 

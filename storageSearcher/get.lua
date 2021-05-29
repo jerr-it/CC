@@ -1,4 +1,4 @@
-os.loadAPI("config/config.lua")
+local config = require(".config")
 local args = {...}
 
 if #args ~= 2 then

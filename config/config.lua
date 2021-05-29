@@ -44,3 +44,12 @@ function save()
     iConfig = nil
     iFilename = nil
 end
+
+return {
+    iConfig = iConfig,
+    iFilename = iFilename,
+    load = load,
+    set = set,
+    get = get,
+    save = save
+}

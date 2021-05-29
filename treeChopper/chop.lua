@@ -1,5 +1,5 @@
 -- Slot 1: Saplings
-os.loadAPI("config/config.lua")
+local config = require(".config")
 
 config.load("treeChopper")
 

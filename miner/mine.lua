@@ -1,12 +1,12 @@
-os.loadAPI("/stack/stack.lua")
-os.loadAPI("/signal/sender.lua")
+local stack = require(".stack")
+local signal = require(".signal")
 
 print("tunnel count? ")
 local tunnelCount = tonumber(read())
 print("tunnel length? ")
 local tunnelLength = tonumber(read())
 
-sender.init("turtle_status_channel", "left")
+signal.init("turtle_status_channel", "left")
 
 local liquids = {"water", "lava"}
 function is_liquid(block_data)
@@ -20,28 +20,28 @@ function forward()
     turtle.forward()
 
     local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then sender.send("Out of fuel!") end
+    if fuel_level == 0 then signal.send("Out of fuel!") end
 end
 
 function back()
     turtle.back()
 
     local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then sender.send("Out of fuel!") end
+    if fuel_level == 0 then signal.send("Out of fuel!") end
 end
 
 function up()
     turtle.up()
 
     local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then sender.send("Out of fuel!") end
+    if fuel_level == 0 then signal.send("Out of fuel!") end
 end
 
 function down()
     turtle.down()
 
     local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then sender.send("Out of fuel!") end
+    if fuel_level == 0 then signal.send("Out of fuel!") end
 end
 
 -- Performs a persistent dig in the given direction
@@ -252,4 +252,4 @@ end
 
 for i = 1, tunnelCount * 3, 1 do back() end
 
-sender.stop()
+signal.stop()

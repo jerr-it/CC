@@ -8,3 +8,5 @@ end
 function send(msg) rednet.broadcast(msg, channel) end
 
 function stop() rednet.close() end
+
+return {init = init, send = send, stop = stop}

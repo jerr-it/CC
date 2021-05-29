@@ -1,10 +1,10 @@
 -- Script used for gathering
 -- 1.Setting own identity
 -- 2.network connected blocks
-os.loadAPI("config/config.lua")
+local config = require(".config")
 
 local args = {...}
-if #args ~= 1 then error("Usage: init <name>") end
+if #args ~= 1 then error("Usage: setup <name>") end
 
 shell.run("/config/create storageConfig")
 

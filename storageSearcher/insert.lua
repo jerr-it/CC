@@ -1,4 +1,4 @@
-os.loadAPI("config/config.lua")
+local config = require(".config")
 config.load("storageConfig")
 
 local self = config.get("self")
