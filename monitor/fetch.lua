@@ -1,6 +1,6 @@
 dependencies = {}
 
-files = {"monitor.lua"}
+files = {"init.lua", "monitor.lua"}
 
 function init() print("Version 1.0") end
 

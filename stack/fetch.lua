@@ -1,6 +1,6 @@
 dependencies = {}
 
-files = {"stack.lua"}
+files = {"init.lua", "stack.lua"}
 
 function init() print("Version 1.0") end
 
