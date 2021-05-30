@@ -4,8 +4,6 @@ files = {"chop.lua", "init.lua"}
 
 exposed = {"chop.lua"}
 
-location = "turtle"
-
 function init()
     print("Version 1.0")
     print("*** 1. Switch into the treeChopper directory using 'cd treeChopper'")
@@ -19,6 +17,5 @@ return {
     dependencies = dependencies,
     files = files,
     exposed = exposed,
-    location = location,
     init = init
 }

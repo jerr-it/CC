@@ -1,3 +1,5 @@
+package.path = package.path .. ";/?/init.lua"
+
 local stack = require("stack")
 local signal = require("signal")
 

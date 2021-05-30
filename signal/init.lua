@@ -1,1 +1,1 @@
-return require("sender")
+return require("sender_export")

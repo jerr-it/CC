@@ -31,12 +31,11 @@ shell.run("delete fetch.lua")
 shell.run("wget " .. gh_url .. "fetch.lua" .. " fetch.lua")
 
 -- Load module information
-local fetch = require("fetch.lua")
+local fetch = require("fetch")
 
 -- Move to the modules specified location
-shell.run("cd /rom/modules/")
-shell.run("mkdir " .. fetch.location)
-shell.run("cd " .. fetch.location)
+shell.run("mkdir " .. gh_folder)
+shell.run("cd " .. gh_folder)
 
 -- Install module files
 for i = 1, #fetch.files, 1 do
@@ -48,7 +47,7 @@ end
 shell.run("cd /")
 for i = 1, #fetch.exposed, 1 do
     local cmd = fetch.exposed[i]
-    shell.run("alias " .. cmd .. " /rom/modules/" .. cmd)
+    shell.run("alias " .. cmd .. "/" .. gh_folder .. "/" .. cmd)
 end
 
 -- Install dependencies

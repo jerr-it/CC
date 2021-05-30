@@ -1,3 +1,5 @@
+package.path = package.path .. ";/?/init.lua"
+
 -- Script used for gathering
 -- 1.Setting own identity
 -- 2.network connected blocks

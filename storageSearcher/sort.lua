@@ -1,3 +1,5 @@
+package.path = package.path .. ";/?/init.lua"
+
 term.setTextColor(colours.red)
 print("Are you sure you want to sort the entire storage? [y/n]")
 local answer = io.read()

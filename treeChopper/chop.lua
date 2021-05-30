@@ -1,3 +1,5 @@
+package.path = package.path .. ";/?/init.lua"
+
 -- Slot 1: Saplings
 local config = require("config")
 

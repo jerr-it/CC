@@ -4,8 +4,6 @@ files = {"get.lua", "insert.lua", "init.lua", "sort.lua"}
 
 exposed = {"get.lua", "insert.lua", "sort.lua"}
 
-location = "turtle"
-
 function init()
     print("Version 1.0")
     print(
@@ -20,6 +18,5 @@ return {
     dependencies = dependencies,
     files = files,
     exposed = exposed,
-    location = location,
     init = init
 }

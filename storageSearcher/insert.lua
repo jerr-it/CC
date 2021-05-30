@@ -1,3 +1,5 @@
+package.path = package.path .. ";/?/init.lua"
+
 local config = require("config")
 config.load("storageConfig")
 
