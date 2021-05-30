@@ -1,1 +1,1 @@
-return {fetch = require("fetch"), module = require("config")}
+return require("config")

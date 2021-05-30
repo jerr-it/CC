@@ -1,5 +1,5 @@
 -- Script for setting a config var in the shell
-local config = require(".config").module
+local config = require(".config")
 local args = {...}
 
 varconfig = args[1]

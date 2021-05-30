@@ -1,1 +1,1 @@
-return {fetch = require("fetch"), module = require("monitor")}
+return require("monitor")

@@ -1,4 +1,4 @@
-local config = require(".config").module
+local config = require(".config")
 local args = {...}
 
 if #args ~= 3 then

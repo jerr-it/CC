@@ -1,7 +1,7 @@
 -- Script used for gathering
 -- 1.Setting own identity
 -- 2.network connected blocks
-local config = require(".config").module
+local config = require(".config")
 
 local args = {...}
 if #args ~= 1 then error("Usage: setup <name>") end

@@ -1,4 +1,4 @@
-local config = require(".config").module
+local config = require(".config")
 config.load("storageConfig")
 
 local self = config.get("self")

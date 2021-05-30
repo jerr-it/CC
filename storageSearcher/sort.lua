@@ -7,7 +7,7 @@ if answer ~= "y" then
 end
 term.setTextColor(colours.white)
 
-local config = require(".config").module
+local config = require(".config")
 
 config.load("storageConfig")
 
