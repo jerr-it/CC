@@ -1,8 +1,11 @@
--- Module for loading and saving configuration
-local iConfig = nil
-local iFilename = nil
+local cfg = {}
 
-function load(configName)
+-- Module for loading and saving configuration
+
+cfg.iConfig = nil
+cfg.iFilename = nil
+
+function cfg.load(configName)
     local filename = "/." .. configName
     if not fs.exists(filename) then error("Config doesn't exist!") end
 
@@ -15,21 +18,21 @@ function load(configName)
     fp.close()
 end
 
-function set(key, value)
+function cfg.set(key, value)
     if iConfig == nil then
         error("Trying to set config value, but non is loaded!")
     end
     iConfig[key] = value
 end
 
-function get(key)
+function cfg.get(key)
     if iConfig == nil then
         error("Trying to get config value, but non is loaded!")
     end
     return iConfig[key]
 end
 
-function save()
+function cfg.save()
     if iConfig == nil then
         error("Trying to save config value, but non is loaded!")
     end
@@ -45,11 +48,4 @@ function save()
     iFilename = nil
 end
 
-return {
-    iConfig = iConfig,
-    iFilename = iFilename,
-    load = load,
-    set = set,
-    get = get,
-    save = save
-}
+return cfg
