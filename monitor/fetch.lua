@@ -1,6 +1,6 @@
 dependencies = {}
 
-files = {"init.lua", "monitor.lua"}
+files = {"init.lua", "monitor_export.lua"}
 
 exposed = {}
 

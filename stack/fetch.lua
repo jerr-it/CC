@@ -1,6 +1,6 @@
 dependencies = {}
 
-files = {"init.lua", "stack.lua"}
+files = {"init.lua", "stack_export.lua"}
 
 exposed = {}
 

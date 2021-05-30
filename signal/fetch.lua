@@ -1,6 +1,6 @@
 dependencies = {}
 
-files = {"init.lua", "receiver.lua", "sender.lua"}
+files = {"init.lua", "receiver.lua", "sender_export.lua"}
 
 exposed = {"receiver.lua"}
 
