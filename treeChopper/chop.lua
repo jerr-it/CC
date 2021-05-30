@@ -1,5 +1,5 @@
 -- Slot 1: Saplings
-local config = require(".config")
+local config = require("config")
 
 config.load("treeChopper")
 

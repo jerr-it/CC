@@ -1,4 +1,4 @@
-local config = require(".config")
+local config = require("config")
 local args = {...}
 
 if #args ~= 2 then

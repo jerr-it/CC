@@ -2,6 +2,10 @@ dependencies = {"cherrysrc CC config"}
 
 files = {"get.lua", "insert.lua", "init.lua", "sort.lua"}
 
+exposed = {"get.lua", "insert.lua", "sort.lua"}
+
+location = "turtle"
+
 function init()
     print("Version 1.0")
     print(
@@ -12,4 +16,10 @@ function init()
         "*** PS. You can find the <name> by attaching a modem to your turtle and right clicking it")
 end
 
-return {dependencies = dependencies, files = files, init = init}
+return {
+    dependencies = dependencies,
+    files = files,
+    exposed = exposed,
+    location = location,
+    init = init
+}

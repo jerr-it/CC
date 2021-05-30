@@ -26,23 +26,32 @@ end
 
 print("Loading module from: " .. gh_url .. "fetch.lua")
 
--- Create folder for module
-shell.run("mkdir " .. gh_folder)
-shell.run("cd " .. gh_folder)
-
 -- Download fetch file
+shell.run("delete fetch.lua")
 shell.run("wget " .. gh_url .. "fetch.lua" .. " fetch.lua")
 
 -- Load module information
 local fetch = require("fetch.lua")
+
+-- Move to the modules specified location
+shell.run("cd /rom/modules/")
+shell.run("mkdir " .. fetch.location)
+shell.run("cd " .. fetch.location)
+
 -- Install module files
 for i = 1, #fetch.files, 1 do
     shell.run("delete " .. fetch.files[i])
     shell.run("wget " .. gh_url .. fetch.files[i] .. " " .. fetch.files[i])
 end
 
+-- Create aliases for exposed lua files
+shell.run("cd /")
+for i = 1, #fetch.exposed, 1 do
+    local cmd = fetch.exposed[i]
+    shell.run("alias " .. cmd .. " /rom/modules/" .. cmd)
+end
+
 -- Install dependencies
-shell.run("cd ..")
 for i = 1, #fetch.dependencies, 1 do
     shell.run("/github " .. fetch.dependencies[i])
 end
