@@ -4,15 +4,11 @@ local stack = require("stack")
 local signal = require("signal")
 
 function find_modem()
-    local modem_side = nil
     for _, side in ipairs(rs.getSides()) do
         if peripheral.getType(side) == "modem" and
-            peripheral.call(side, "isWireless") then
-            modem_side = size
-            break
-        end
+            peripheral.call(side, "isWireless") then return side end
     end
-    return modem_side
+    return nil
 end
 
 print("tunnel count? ")
