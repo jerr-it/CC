@@ -15,6 +15,20 @@ function find_modem()
     return modem_side
 end
 
+print("tunnel count? ")
+local tunnelCount = tonumber(read())
+print("tunnel length? ")
+local tunnelLength = tonumber(read())
+
+local modem_side = find_modem()
+
+if modem_side == nil then
+    print("No modem found")
+    return
+else
+    signal.init("turtle_status_channel", modem_side)
+end
+
 local liquids = {"water", "lava"}
 function is_liquid(block_data)
     for i = 1, #liquids, 1 do
@@ -245,20 +259,6 @@ function dump_items(progress)
     turtle.select(1)
 
     for i = 1, progress * 3, 1 do forward() end
-end
-
-print("tunnel count? ")
-local tunnelCount = tonumber(read())
-print("tunnel length? ")
-local tunnelLength = tonumber(read())
-
-local modem_side = find_modem()
-
-if modem_side == nil then
-    print("No modem found")
-    return
-else
-    signal.init("turtle_status_channel", modem_side)
 end
 
 for i = 1, tunnelCount, 1 do
