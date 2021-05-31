@@ -3,20 +3,6 @@ package.path = package.path .. ";/?/init.lua"
 local stack = require("stack")
 local signal = require("signal")
 
-print("tunnel count? ")
-local tunnelCount = tonumber(read())
-print("tunnel length? ")
-local tunnelLength = tonumber(read())
-
-local modem_side = find_modem()
-
-if modem_side == nil then
-    print("No modem found")
-    return
-else
-    signal.init("turtle_status_channel", modem_side)
-end
-
 function find_modem()
     local modem_side = nil
     for _, side in ipairs(rs.getSides()) do
@@ -259,6 +245,20 @@ function dump_items(progress)
     turtle.select(1)
 
     for i = 1, progress * 3, 1 do forward() end
+end
+
+print("tunnel count? ")
+local tunnelCount = tonumber(read())
+print("tunnel length? ")
+local tunnelLength = tonumber(read())
+
+local modem_side = find_modem()
+
+if modem_side == nil then
+    print("No modem found")
+    return
+else
+    signal.init("turtle_status_channel", modem_side)
 end
 
 for i = 1, tunnelCount, 1 do
