@@ -8,7 +8,26 @@ local tunnelCount = tonumber(read())
 print("tunnel length? ")
 local tunnelLength = tonumber(read())
 
-signal.init("turtle_status_channel", "left")
+local modem_side = find_modem()
+
+if modem_side == nil then
+    print("No modem found")
+    return
+else
+    signal.init("turtle_status_channel", modem_side)
+end
+
+function find_modem()
+    local modem_side = nil
+    for _, side in ipairs(rs.getSides()) do
+        if peripheral.getType(side) == "modem" and
+            peripheral.call(side, "isWireless") then
+            modem_side = size
+            break
+        end
+    end
+    return modem_side
+end
 
 local liquids = {"water", "lava"}
 function is_liquid(block_data)
@@ -18,32 +37,37 @@ function is_liquid(block_data)
     return false
 end
 
+function out_of_fuel()
+    local fuel_level = turtle.getFuelLevel()
+    local x, y, z = gps.locate(5)
+
+    if fuel_level == 0 then
+        if x == nil then
+            signal.send("Out of fuel at unknown location")
+        else
+            signal.send("Out of fuel at (" .. x .. ", " .. y .. ", " .. z .. ")")
+        end
+    end
+end
+
 function forward()
     turtle.forward()
-
-    local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then signal.send("Out of fuel!") end
+    out_of_fuel()
 end
 
 function back()
     turtle.back()
-
-    local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then signal.send("Out of fuel!") end
+    out_of_fuel()
 end
 
 function up()
     turtle.up()
-
-    local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then signal.send("Out of fuel!") end
+    out_of_fuel()
 end
 
 function down()
     turtle.down()
-
-    local fuel_level = turtle.getFuelLevel()
-    if fuel_level == 0 then signal.send("Out of fuel!") end
+    out_of_fuel()
 end
 
 -- Performs a persistent dig in the given direction
