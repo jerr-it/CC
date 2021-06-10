@@ -12,9 +12,9 @@ function find_modem()
 end
 
 print("tunnel count? ")
-local tunnelCount = tonumber(read())
+local tunnel_count = tonumber(read())
 print("tunnel length? ")
-local tunnelLength = tonumber(read())
+local tunnel_len = tonumber(read())
 
 local modem_side = find_modem()
 
@@ -230,14 +230,22 @@ function dig_step()
 
     dig(turtle.dig, turtle.inspect)
     forward()
-    dig(turtle.digDown, turtle.inspectDown)
 end
 
 -- Digs a side tunnel, perpendicular to the main tunnel
 function dig_tunnel()
-    for i = 1, tunnelLength, 1 do dig_step() end
+    for i = 1, tunnel_len, 1 do dig_step() end
 
-    for i = 1, tunnelLength, 1 do back() end
+    dig(turtle.digDown, turtle.inspectDown)
+    turtle.down()
+    turtle.turnLeft()
+    turtle.turnLeft()
+
+    for i = 1, tunnel_len, 1 do dig_step() end
+
+    turtle.up()
+    turtle.turnLeft()
+    turtle.turnLeft()
 end
 
 -- Returns true if the last slot of the turtle contains atleast one item
@@ -257,10 +265,15 @@ function dump_items(progress)
     for i = 1, progress * 3, 1 do forward() end
 end
 
-for i = 1, tunnelCount, 1 do
+for i = 1, tunnel_count, 1 do
     dig_step()
+    dig(turtle.digDown, turtle.inspectDown)
+
     dig_step()
+    dig(turtle.digDown, turtle.inspectDown)
+
     dig_step()
+    dig(turtle.digDown, turtle.inspectDown)
 
     turtle.turnRight()
     dig_tunnel()
@@ -272,6 +285,6 @@ for i = 1, tunnelCount, 1 do
     if is_full() then dump_items(i) end
 end
 
-for i = 1, tunnelCount * 3, 1 do back() end
+for i = 1, tunnel_count * 3, 1 do back() end
 
 signal.stop()
