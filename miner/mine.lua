@@ -35,7 +35,7 @@ end
 
 function out_of_fuel()
     local fuel_level = turtle.getFuelLevel()
-    local x, y, z = gps.locate(5)
+    local x, y, z = gps.locate(0.1)
 
     if fuel_level == 0 then
         if x == nil then
