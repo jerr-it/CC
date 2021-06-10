@@ -3,20 +3,12 @@ package.path = package.path .. ";/?/init.lua"
 local stack = require("stack")
 local signal = require("signal")
 
-function find_modem()
-    for _, side in ipairs(rs.getSides()) do
-        if peripheral.getType(side) == "modem" and
-            peripheral.call(side, "isWireless") then return side end
-    end
-    return nil
-end
-
 print("tunnel count? ")
 local tunnel_count = tonumber(read())
 print("tunnel length? ")
 local tunnel_len = tonumber(read())
 
-local modem_side = find_modem()
+local modem_side = signal.find_modem()
 
 if modem_side == nil then
     print("No modem found")
