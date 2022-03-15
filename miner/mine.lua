@@ -31,9 +31,9 @@ function out_of_fuel()
 
     if fuel_level == 0 then
         if x == nil then
-            signal.send("Out of fuel at unknown location")
+            signal.broadcast("Out of fuel at unknown location")
         else
-            signal.send("Out of fuel at (" .. x .. ", " .. y .. ", " .. z .. ")")
+            signal.broadcast("Out of fuel at (" .. x .. ", " .. y .. ", " .. z .. ")")
         end
     end
 end
@@ -279,4 +279,5 @@ end
 
 for i = 1, tunnel_count * 3, 1 do back() end
 
+signal.broadcast(os.computerLabel() .. " completed mining.")
 signal.stop()

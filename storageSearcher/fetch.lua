@@ -1,8 +1,8 @@
 dependencies = {"cherrysrc CC config"}
 
-files = {"get.lua", "insert.lua", "init.lua", "sort.lua"}
+files = {"get.lua", "insert.lua", "setup.lua", "sort.lua"}
 
-exposed = {"get.lua", "insert.lua", "sort.lua"}
+exposed = {"get.lua", "insert.lua", "setup.lua", "sort.lua"}
 
 function init()
     print("Version 1.0")

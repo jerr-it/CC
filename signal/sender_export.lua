@@ -7,6 +7,10 @@ function sender.init(ch, mod)
     rednet.open(mod)
 end
 
+function sender.set_channel(ch)
+    channel = ch
+end
+
 function sender.find_modem()
     for _, side in ipairs(rs.getSides()) do
         if peripheral.getType(side) == "modem" and
@@ -15,7 +19,7 @@ function sender.find_modem()
     return nil
 end
 
-function sender.send(msg) rednet.broadcast(msg, channel) end
+function sender.broadcast(msg) rednet.broadcast(msg, channel) end
 
 function sender.stop() rednet.close() end
 
